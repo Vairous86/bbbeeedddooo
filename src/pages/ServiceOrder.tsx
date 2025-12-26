@@ -63,7 +63,10 @@ const ServiceOrder = () => {
         setService(s);
         const pkgRes = await fetchAllPackages();
         const pkgArr = Array.isArray(pkgRes?.data) ? (pkgRes.data as any[]) : [];
-        const list = pkgArr.filter((p) => p.serviceId === s.id);
+        // Sort packages by units (ascending) so smallest packages appear first
+        const list = pkgArr
+          .filter((p) => p.serviceId === s.id)
+          .sort((a, b) => (Number(a.units || 0) - Number(b.units || 0)));
         setPackages(list);
         const pk = list[0];
         if (pk) setSelectedPackageId(pk.id);

@@ -30,6 +30,7 @@ import {
   savePaymentSettings,
   getAllOrders,
   updateOrderStatus as updateOrderStatusApi,
+  deleteOrder as deleteOrderApi,
 } from "@/lib/db";
 import { useToast } from "@/hooks/use-toast";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -305,6 +306,27 @@ const AdminDashboard = () => {
       toast({ title: t("packageDeleted") });
       loadPackages();
     }
+  };
+
+  // Delete an order (admin only) with confirmation and optimistic UI update
+  const handleDeleteOrder = async (id: string) => {
+    const isAdmin = sessionStorage.getItem("admin_logged_in");
+    if (!isAdmin) return toast({ title: "Unauthorized" });
+
+    if (!window.confirm("هل أنت متأكد أنك تريد حذف هذا الطلب؟ هذه العملية لا يمكن التراجع عنها.")) return;
+
+    // Optimistically remove from UI
+    const previous = orders;
+    setOrders((prev) => prev.filter((o) => o.id !== id));
+
+    const res = await deleteOrderApi(id);
+    if (!res?.ok) {
+      toast({ title: t("failedDelete") || "Failed to delete order" });
+      setOrders(previous); // revert UI
+      return;
+    }
+
+    toast({ title: t("deleted") });
   };
 
   const handleEditPackage = (id: string) => {
@@ -740,7 +762,7 @@ const AdminDashboard = () => {
                       )}
                     </div>
 
-                    <div className="min-w-[140px]">
+                    <div className="min-w-[140px] flex flex-col items-stretch gap-2">
                         <Select
                           value={order.status}
                           onValueChange={(v) =>
@@ -757,9 +779,21 @@ const AdminDashboard = () => {
                             <SelectItem value="cancelled">ملغي</SelectItem>
                           </SelectContent>
                         </Select>
-                        <p className="text-xs text-muted-foreground mt-2 text-center">
+                        <div className="flex items-center justify-between">
+                          <p className="text-xs text-muted-foreground mt-2">
                             {new Date(order.createdAt).toLocaleDateString()}
-                        </p>
+                          </p>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDeleteOrder(order.id)}
+                            className="ml-2"
+                            title="Delete order"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                            <span className="sr-only">Delete</span>
+                          </Button>
+                        </div>
                     </div>
                   </CardContent>
                 </Card>

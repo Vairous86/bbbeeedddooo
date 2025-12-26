@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Settings, Sun, Moon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Settings } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCurrency } from "@/contexts/CurrencyContext";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -19,7 +18,6 @@ const logoUrl = "https://btimnibnsoeotkomayte.supabase.co/storage/v1/object/publ
 export const Navbar = () => {
   const navigate = useNavigate();
   const { currency, setCurrency } = useCurrency();
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const { locale, setLocale, t } = useLocale();
 
@@ -35,22 +33,7 @@ export const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-4">
-            {/* Theme toggle - cycles between dark and light (system can be chosen via other UI if needed) */}
-            {mounted && (
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="text-muted-foreground hover:text-foreground"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5" />
-                ) : (
-                  <Moon className="w-5 h-5" />
-                )}
-              </Button>
-            )}
+
             {/* Language toggle */}
             {mounted && (
               <Button

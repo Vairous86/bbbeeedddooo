@@ -6,33 +6,29 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
-*/
+
+NOTE: Light Mode support was removed — Dark Mode is the single, permanent theme. */
 
 @layer base {
   :root {
-    /* Off-white background to avoid harsh pure white (premium, easy on the eyes) */
-    --background: 214 16% 96%; /* ~ #f7f8fa */
+    /* Dark mode only as base (Light Mode removed) */
+    --background: 220 12% 6%;
+    --foreground: 210 16% 96%;
 
-    /* Text hierarchy for Light Mode */
-    --foreground: 220 12% 9%;   /* Headings: ~ #111827 (strong but not pure black) */
-    --muted-foreground: 220 14% 27%; /* Body text: ~ #374151 (comfortable reading color) */
+    --card: 220 12% 12%;
+    --card-foreground: 210 16% 96%;
 
-    /* Card surfaces: slightly warmer/off-white for elevation */
-    --card: 214 18% 98%; /* ~ #f5f6f8 */
-    --card-foreground: 220 14% 27%;
+    --popover: 220 12% 12%;
+    --popover-foreground: 210 16% 96%;
 
-    --popover: 214 18% 98%;
-    --popover-foreground: 220 14% 27%;
-
-    /* Brand colors remain the same as Dark Mode for consistency */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 214 32% 91%;
-    --secondary-foreground: 217 33% 17%;
+    --secondary: 220 12% 14%;
+    --secondary-foreground: 210 16% 96%;
 
-    /* Muted accents relative to body copy */
-    --muted: 214 26% 96%;
+    --muted: 220 12% 10%;
+    --muted-foreground: 210 16% 76%;
 
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
@@ -40,106 +36,43 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Subtle, soft borders (avoid harsh lines) */
-    --border: 214 20% 92%;
-    --input: 214 20% 94%;
+    --border: 220 12% 14%;
+    --input: 220 12% 14%;
     --ring: 217 91% 60%;
 
-    /* Slightly larger radius in light mode for a softer look (dark mode keeps its own value) */
-    --radius: 1rem;
+    --radius: 0.75rem;
 
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
-    /* Gentle gradients and card elevation for Light Mode */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(217 91% 60%),
-      hsl(217 91% 70%)
+      hsl(217 91% 50%)
     );
     --gradient-card: linear-gradient(
       to bottom right,
-      hsl(214 18% 99%),
-      hsl(214 18% 96%)
+      hsl(220 12% 8%),
+      hsl(220 12% 12%)
     );
 
-    /* Soft shadow for cards (low contrast, premium elevation) */
-    --shadow-card: 0 6px 18px -6px hsl(217 20% 10% / 0.06),
-      0 2px 6px -2px hsl(217 20% 12% / 0.04);
-    --shadow-card-hover: 0 14px 36px -12px hsl(217 20% 10% / 0.10),
-      0 6px 18px -6px hsl(217 20% 12% / 0.06);
+    --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.6),
+      0 1px 2px -1px hsl(0 0% 0% / 0.6);
+    --shadow-card-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.06),
+      0 4px 6px -4px hsl(217 91% 60% / 0.04);
 
-    --sidebar-background: 214 16% 96%;
-    --sidebar-foreground: 220 14% 27%;
+    --sidebar-background: 220 12% 8%;
+    --sidebar-foreground: 210 16% 96%;
     --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 214 18% 96%;
-    --sidebar-accent-foreground: 220 14% 27%;
-    --sidebar-border: 214 20% 92%;
+    --sidebar-accent: 220 12% 10%;
+    --sidebar-accent-foreground: 210 16% 96%;
+    --sidebar-border: 220 12% 14%;
     --sidebar-ring: 217 91% 60%;
   }
 }
 
-/* Dark theme variables (applies when .dark class is present on <html>) */
-.dark {
-  --background: 220 12% 6%;
-  --foreground: 210 16% 96%;
 
-  --card: 220 12% 12%;
-  --card-foreground: 210 16% 96%;
-
-  --popover: 220 12% 12%;
-  --popover-foreground: 210 16% 96%;
-
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 220 12% 14%;
-  --secondary-foreground: 210 16% 96%;
-
-  --muted: 220 12% 10%;
-  --muted-foreground: 210 16% 76%;
-
-  --accent: 217 91% 60%;
-  --accent-foreground: 0 0% 100%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 220 12% 14%;
-  --input: 220 12% 14%;
-  --ring: 217 91% 60%;
-
-  --radius: 0.75rem;
-
-  --success: 142 71% 45%;
-  --success-foreground: 0 0% 100%;
-
-  --gradient-primary: linear-gradient(
-    135deg,
-    hsl(217 91% 60%),
-    hsl(217 91% 50%)
-  );
-  --gradient-card: linear-gradient(
-    to bottom right,
-    hsl(220 12% 8%),
-    hsl(220 12% 12%)
-  );
-
-  --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.6),
-    0 1px 2px -1px hsl(0 0% 0% / 0.6);
-  --shadow-card-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.06),
-    0 4px 6px -4px hsl(217 91% 60% / 0.04);
-
-  --sidebar-background: 220 12% 8%;
-  --sidebar-foreground: 210 16% 96%;
-  --sidebar-primary: 217 91% 60%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 220 12% 10%;
-  --sidebar-accent-foreground: 210 16% 96%;
-  --sidebar-border: 220 12% 14%;
-  --sidebar-ring: 217 91% 60%;
-}
 
 @layer base {
   * {

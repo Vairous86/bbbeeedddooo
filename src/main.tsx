@@ -59,7 +59,8 @@ bootSeo();
 
 createRoot(document.getElementById("root")!).render(
   <LocaleProvider defaultLocale={"ar"}>
-    <ThemeProvider attribute="class" defaultTheme="system">
+    {/* ThemeProvider locked to dark only (Light Mode removed) */}
+    <ThemeProvider attribute="class" defaultTheme="dark">
       <App />
     </ThemeProvider>
   </LocaleProvider>

@@ -363,6 +363,12 @@ export async function updateOrderStatus(id: string, status: Order["status"]) {
   return { ok: !error, item: Array.isArray(data) ? data[0] : null };
 }
 
+// Delete an order by id. This is intended for admin use only.
+export async function deleteOrder(id: string) {
+  const { error } = await supabase.from("orders").delete().eq("id", id);
+  return { ok: !error, id };
+}
+
 export async function addAnalytics(event: Omit<AnalyticsEvent, "id" | "timestamp">) {
   const row = {
     type: event.type,
