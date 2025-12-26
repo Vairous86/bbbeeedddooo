@@ -26,7 +26,7 @@ export const PlatformCard = ({ platform }: PlatformCardProps) => {
       tabIndex={0}
       onClick={open}
       onKeyDown={handleKey}
-      className="gradient-card shadow-card hover:shadow-card-hover transition-all duration-300 hover:scale-105 border-border/50 animate-fade-in overflow-hidden group cursor-pointer"
+      className="gradient-card newyear-card shadow-card transition-all duration-300 border-border/40 animate-fade-in overflow-hidden group cursor-pointer"
       aria-label={`Open platform ${platform.name}`}
     >
       <div className="aspect-video w-full overflow-hidden relative">
@@ -38,8 +38,12 @@ export const PlatformCard = ({ platform }: PlatformCardProps) => {
         <div 
           className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
         />
+        {/* New Year badge */}
+        <div className="absolute top-3 right-3">
+          <span className="newyear-offer-badge">🎆 New Year</span>
+        </div>
         <div 
-          className="absolute bottom-4 left-4 text-white font-heading font-bold text-2xl"
+          className="absolute bottom-4 left-4 text-white font-heading font-bold text-2xl glow-text"
         >
           {platform.name}
         </div>
@@ -52,7 +56,7 @@ export const PlatformCard = ({ platform }: PlatformCardProps) => {
       <CardContent>
         <Button 
           onClick={(e) => { e.stopPropagation(); open(); }}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-2"
+          className="w-full newyear-btn text-black font-medium gap-2"
         >
           <Eye className="w-4 h-4" />
           View Services

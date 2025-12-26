@@ -39,7 +39,7 @@ const PlatformServices = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="py-12 px-4 bg-gradient-to-b from-primary/5 to-background">
+      <section className="py-12 px-4 hero-newyear">
         <div className="container mx-auto max-w-6xl">
           <Button 
             variant="ghost" 
@@ -51,7 +51,7 @@ const PlatformServices = () => {
           </Button>
           
           <div className="flex items-center gap-6 animate-fade-in">
-            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg">
+            <div className="w-24 h-24 rounded-2xl overflow-hidden shadow-lg ring-1 ring-white/6">
               <img 
                 src={platform.image} 
                 alt={platform.name}
@@ -59,10 +59,10 @@ const PlatformServices = () => {
               />
             </div>
             <div>
-              <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-2">
+              <h1 className="text-4xl md:text-5xl font-heading font-bold text-white mb-2 glow-text">
                 {platform.name} {t("platformServicesTitle")}
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-xl text-white/80">
                 {platform.description}
               </p>
             </div>

@@ -94,12 +94,18 @@ const Index = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto max-w-6xl text-center animate-fade-in">
-          <h1 className="text-4xl md:text-5xl lg:text-5xl font-heading font-bold text-foreground mb-4">
+      <section className="py-20 px-4 hero-newyear">
+        <div className="container mx-auto max-w-6xl text-center animate-fade-in relative">
+          {/* Subtle sparkles */}
+          <span className="hero-sparkle s1" aria-hidden />
+          <span className="hero-sparkle s2" aria-hidden />
+          <span className="hero-sparkle s3" aria-hidden />
+          <span className="hero-sparkle s4" aria-hidden />
+
+          <h1 className="text-4xl md:text-5xl lg:text-5xl font-heading font-bold text-white mb-4 glow-text">
             {t("homeHeroTitle")}
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-6">
             {t("homeHeroDesc")}
           </p>
 
@@ -192,7 +198,7 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center animate-scale-in">
               <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                <Clock className="w-8 h-8 text-primary" />
+                <Clock className="w-8 h-8 text-newyear-gold" />
               </div>
               <h3 className="font-heading font-semibold text-foreground mb-2">
                 {t("fastDeliveryTitle")}
@@ -206,7 +212,7 @@ const Index = () => {
               style={{ animationDelay: "0.1s" }}
             >
               <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                <Shield className="w-8 h-8 text-primary" />
+                <Shield className="w-8 h-8 text-newyear-gold" />
               </div>
               <h3 className="font-heading font-semibold text-foreground mb-2">
                 {t("safeTitle")}
@@ -220,7 +226,7 @@ const Index = () => {
               style={{ animationDelay: "0.2s" }}
             >
               <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                <Award className="w-8 h-8 text-primary" />
+                <Award className="w-8 h-8 text-newyear-gold" />
               </div>
               <h3 className="font-heading font-semibold text-foreground mb-2">
                 {t("qualityTitle")}
@@ -234,7 +240,7 @@ const Index = () => {
               style={{ animationDelay: "0.3s" }}
             >
               <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                <Headphones className="w-8 h-8 text-primary" />
+                <Headphones className="w-8 h-8 text-newyear-gold" />
               </div>
               <h3 className="font-heading font-semibold text-foreground mb-2">
                 {t("supportTitle")}
@@ -313,6 +319,12 @@ const Index = () => {
           >
             <Send className="w-6 h-6" />
           </a>
+
+          {/* Minimal festive decoration */}
+          <div className="hidden sm:flex items-center gap-2 text-muted-foreground ml-4">
+            <span className="text-newyear-gold">✨</span>
+            <span className="text-white/70">Happy New Year</span>
+          </div>
         </div>
       </footer>
     </div>

@@ -29,18 +29,21 @@ export const ServiceTypeCard = ({ service }: ServiceTypeCardProps) => {
       tabIndex={0}
       onClick={open}
       onKeyDown={handleKey}
-      className="gradient-card shadow-card hover:shadow-card-hover transition-all duration-300 hover:scale-105 border-border/50 animate-fade-in cursor-pointer"
+      className="gradient-card newyear-card shadow-card transition-all duration-300 border-border/40 animate-fade-in cursor-pointer"
       aria-label={`Order ${service.title}`}
     >
       <CardHeader className="pb-3">
-        <div className="aspect-video w-full mb-3 rounded-lg overflow-hidden">
+        <div className="aspect-video w-full mb-3 rounded-lg overflow-hidden relative">
           <img 
             src={service.image} 
             alt={service.title}
             className="w-full h-full object-cover"
           />
+          <div className="absolute top-3 right-3">
+            <span className="newyear-offer-badge">🎆 Offer</span>
+          </div>
         </div>
-        <CardTitle className="text-xl font-heading font-semibold text-foreground">
+        <CardTitle className="text-xl font-heading font-semibold text-foreground glow-text">
           {service.title}
         </CardTitle>
       </CardHeader>
@@ -65,7 +68,7 @@ export const ServiceTypeCard = ({ service }: ServiceTypeCardProps) => {
         </div>
         <Button 
           onClick={(e) => { e.stopPropagation(); open(); }}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium gap-2"
+          className="w-full newyear-btn text-black font-medium gap-2"
         >
           <ShoppingCart className="w-4 h-4" />
           Order Now
