@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 217 33% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 217 33% 17%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(217 91% 60%),
+      hsl(217 91% 70%)
+    );
+    --gradient-card: linear-gradient(
+      to bottom right,
+      hsl(0 0% 100%),
+      hsl(214 32% 98%)
+    );
+
+    --shadow-card: 0 1px 3px 0 hsl(217 33% 17% / 0.1),
+      0 1px 2px -1px hsl(217 33% 17% / 0.1);
+    --shadow-card-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.2),
+      0 4px 6px -4px hsl(217 91% 60% / 0.1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 217 33% 17%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 32% 91%;
+    --sidebar-accent-foreground: 217 33% 17%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+/* Dark theme variables (applies when .dark class is present on <html>) */
+.dark {
+  --background: 220 12% 6%;
+  --foreground: 210 16% 96%;
+
+  --card: 220 12% 12%;
+  --card-foreground: 210 16% 96%;
+
+  --popover: 220 12% 12%;
+  --popover-foreground: 210 16% 96%;
+
+  --primary: 217 91% 60%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 220 12% 14%;
+  --secondary-foreground: 210 16% 96%;
+
+  --muted: 220 12% 10%;
+  --muted-foreground: 210 16% 76%;
+
+  --accent: 217 91% 60%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 12% 14%;
+  --input: 220 12% 14%;
+  --ring: 217 91% 60%;
+
+  --radius: 0.75rem;
+
+  --success: 142 71% 45%;
+  --success-foreground: 0 0% 100%;
+
+  --gradient-primary: linear-gradient(
+    135deg,
+    hsl(217 91% 60%),
+    hsl(217 91% 50%)
+  );
+  --gradient-card: linear-gradient(
+    to bottom right,
+    hsl(220 12% 8%),
+    hsl(220 12% 12%)
+  );
+
+  --shadow-card: 0 1px 3px 0 hsl(0 0% 0% / 0.6),
+    0 1px 2px -1px hsl(0 0% 0% / 0.6);
+  --shadow-card-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.06),
+    0 4px 6px -4px hsl(217 91% 60% / 0.04);
+
+  --sidebar-background: 220 12% 8%;
+  --sidebar-foreground: 210 16% 96%;
+  --sidebar-primary: 217 91% 60%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 220 12% 10%;
+  --sidebar-accent-foreground: 210 16% 96%;
+  --sidebar-border: 220 12% 14%;
+  --sidebar-ring: 217 91% 60%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .shadow-card-hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* New Year theme variables and subtle confetti/banner styles */
+  :root {
+    --newyear-gold: 45 95% 55%; /* HSL for gold */
+    --newyear-blue: 220 62% 20%;
+    --newyear-purple: 260 55% 30%;
+  }
+
+  .newyear-banner {
+    background: linear-gradient(90deg, hsl(var(--newyear-blue)), hsl(var(--newyear-purple)));
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .newyear-banner .badge {
+    display: inline-block;
+    background: linear-gradient(90deg, hsl(var(--newyear-gold)), rgba(255,255,255,0.1));
+    color: black;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    font-weight: 600;
+  }
+
+  .confetti-wrapper { position: relative; width: 72px; height: 20px; }
+  .confetti-wrapper .c { position: absolute; width: 6px; height: 6px; border-radius: 2px; opacity: 0.95; animation: fall 2s linear infinite; }
+  .confetti-wrapper .c1 { background: hsl(var(--newyear-gold)); left: 0; animation-delay: 0s; }
+  .confetti-wrapper .c2 { background: hsl(var(--newyear-blue)); left: 18px; animation-delay: 0.2s; }
+  .confetti-wrapper .c3 { background: hsl(var(--newyear-purple)); left: 36px; animation-delay: 0.4s; }
+  .confetti-wrapper .c4 { background: hsl(320 80% 60%); left: 54px; animation-delay: 0.6s; }
+  .confetti-wrapper .c5 { background: hsl(45 95% 50%); left: 66px; animation-delay: 0.8s; }
+
+  @keyframes fall {
+    0% { transform: translateY(-6px) rotate(0deg) scale(1); opacity: 0.95; }
+    50% { transform: translateY(4px) rotate(45deg) scale(0.9); opacity: 0.9; }
+    100% { transform: translateY(-2px) rotate(90deg) scale(1); opacity: 0.95; }
+  }
+}
