@@ -10,23 +10,29 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 217 33% 17%;
+    /* Off-white background to avoid harsh pure white (premium, easy on the eyes) */
+    --background: 214 16% 96%; /* ~ #f7f8fa */
 
-    --card: 0 0% 100%;
-    --card-foreground: 217 33% 17%;
+    /* Text hierarchy for Light Mode */
+    --foreground: 220 12% 9%;   /* Headings: ~ #111827 (strong but not pure black) */
+    --muted-foreground: 220 14% 27%; /* Body text: ~ #374151 (comfortable reading color) */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 217 33% 17%;
+    /* Card surfaces: slightly warmer/off-white for elevation */
+    --card: 214 18% 98%; /* ~ #f5f6f8 */
+    --card-foreground: 220 14% 27%;
 
+    --popover: 214 18% 98%;
+    --popover-foreground: 220 14% 27%;
+
+    /* Brand colors remain the same as Dark Mode for consistency */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 214 32% 91%;
     --secondary-foreground: 217 33% 17%;
 
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
+    /* Muted accents relative to body copy */
+    --muted: 214 26% 96%;
 
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
@@ -34,15 +40,18 @@ All colors MUST be HSL.
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    /* Subtle, soft borders (avoid harsh lines) */
+    --border: 214 20% 92%;
+    --input: 214 20% 94%;
     --ring: 217 91% 60%;
 
-    --radius: 0.75rem;
+    /* Slightly larger radius in light mode for a softer look (dark mode keeps its own value) */
+    --radius: 1rem;
 
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
 
+    /* Gentle gradients and card elevation for Light Mode */
     --gradient-primary: linear-gradient(
       135deg,
       hsl(217 91% 60%),
@@ -50,22 +59,23 @@ All colors MUST be HSL.
     );
     --gradient-card: linear-gradient(
       to bottom right,
-      hsl(0 0% 100%),
-      hsl(214 32% 98%)
+      hsl(214 18% 99%),
+      hsl(214 18% 96%)
     );
 
-    --shadow-card: 0 1px 3px 0 hsl(217 33% 17% / 0.1),
-      0 1px 2px -1px hsl(217 33% 17% / 0.1);
-    --shadow-card-hover: 0 10px 15px -3px hsl(217 91% 60% / 0.2),
-      0 4px 6px -4px hsl(217 91% 60% / 0.1);
+    /* Soft shadow for cards (low contrast, premium elevation) */
+    --shadow-card: 0 6px 18px -6px hsl(217 20% 10% / 0.06),
+      0 2px 6px -2px hsl(217 20% 12% / 0.04);
+    --shadow-card-hover: 0 14px 36px -12px hsl(217 20% 10% / 0.10),
+      0 6px 18px -6px hsl(217 20% 12% / 0.06);
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 217 33% 17%;
+    --sidebar-background: 214 16% 96%;
+    --sidebar-foreground: 220 14% 27%;
     --sidebar-primary: 217 91% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 214 32% 91%;
-    --sidebar-accent-foreground: 217 33% 17%;
-    --sidebar-border: 214 32% 91%;
+    --sidebar-accent: 214 18% 96%;
+    --sidebar-accent-foreground: 220 14% 27%;
+    --sidebar-border: 214 20% 92%;
     --sidebar-ring: 217 91% 60%;
   }
 }
@@ -137,7 +147,13 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    /* Use body token for main content (comfortable reading contrast) */
+    @apply bg-background text-muted-foreground font-sans antialiased;
+  }
+
+  /* Headings should explicitly use the stronger heading color */
+  h1, h2, h3, h4, h5, h6 {
+    color: hsl(var(--foreground));
   }
 }
 
