@@ -97,6 +97,20 @@ const AdminDashboard = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
 
+  // Auto-refresh interval (seconds). 0 = off. Persist in localStorage.
+  const [refreshSeconds, setRefreshSeconds] = useState<number>(() => {
+    try {
+      return parseInt(localStorage.getItem("admin_refresh_seconds") || "5");
+    } catch {
+      return 5;
+    }
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem("admin_refresh_seconds", String(refreshSeconds));
+    } catch {}
+  }, [refreshSeconds]);
+
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("admin_logged_in");
     if (!isLoggedIn) {
@@ -415,6 +429,47 @@ const AdminDashboard = () => {
     );
     toast({ title: "Order updated" });
   };
+
+  // Refresh orders in background without visible flicker: fetch and update only when changed
+  const refreshOrders = async () => {
+    try {
+      const res = await getAllOrders();
+      const arr = Array.isArray(res?.data) ? (res.data as any[]) : [];
+      const newOrders = arr.map((o) => ({
+        id: o.id,
+        serviceId: o.service_id || o.serviceId,
+        serviceName: o.service_name || o.serviceName,
+        platform: o.platform,
+        accountUrl: o.account_url || o.accountUrl,
+        quantity: o.quantity,
+        whatsappNumber: o.whatsapp_number || o.whatsappNumber,
+        price: o.price,
+        currency: o.currency,
+        paymentMethod: o.payment_method || o.paymentMethod,
+        paymentScreenshot: o.payment_screenshot || o.paymentScreenshot,
+        status: o.status,
+        createdAt: o.created_at || o.createdAt,
+      }));
+
+      setOrders((prev) => {
+        try {
+          const prevStr = JSON.stringify(prev);
+          const newStr = JSON.stringify(newOrders);
+          if (prevStr === newStr) return prev; // no change -> avoid re-render
+        } catch {}
+        return newOrders;
+      });
+    } catch {}
+  };
+
+  useEffect(() => {
+    if (!refreshSeconds || refreshSeconds <= 0) return;
+    // initial fetch
+    refreshOrders();
+    const id = setInterval(refreshOrders, refreshSeconds * 1000);
+    return () => clearInterval(id);
+  }, [refreshSeconds]);
+
   const handleOrderStatusChange = (
     orderId: string,
     status: Order["status"]
@@ -694,7 +749,25 @@ const AdminDashboard = () => {
           </TabsContent>
 
           <TabsContent value="orders" className="space-y-6">
-            <h1 className="text-3xl font-heading font-bold">{t("orders")}</h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-3xl font-heading font-bold">{t("orders")}</h1>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">تحديث تلقائي</span>
+                <Select value={String(refreshSeconds)} onValueChange={(v) => setRefreshSeconds(parseInt(v))}>
+                  <SelectTrigger className="w-40">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="0">متوقف</SelectItem>
+                    <SelectItem value="2">كل 2 ثانية</SelectItem>
+                    <SelectItem value="5">كل 5 ثواني</SelectItem>
+                    <SelectItem value="10">كل 10 ثواني</SelectItem>
+                    <SelectItem value="30">كل 30 ثانية</SelectItem>
+                    <SelectItem value="60">كل 60 ثانية</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
             {orders.length === 0 ? (
               <p className="text-muted-foreground">{t("noOrdersYet")}</p>
             ) : (
