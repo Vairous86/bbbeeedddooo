@@ -37,17 +37,17 @@ const MetaPageView = () => {
     // Log visit for internal analytics
     const log = async () => {
       try {
-        const res = await fetch("https://ipapi.co/json/");
+        const res = await fetch("https://ipwho.is/");
         const data = await res.json();
         logVisit({
-          ip_address: data.ip,
-          country: data.country_name,
-          city: data.city,
+          ip_address: data.ip || "unknown",
+          country: data.country || "unknown",
+          city: data.city || "unknown",
           page_url: window.location.href,
           user_agent: navigator.userAgent
         });
       } catch {
-        // Fallback if ipapi fails
+        // Fallback if ip API fails
         logVisit({
           ip_address: "unknown",
           country: "unknown",

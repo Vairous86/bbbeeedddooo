@@ -711,7 +711,7 @@ export type Currency = "SAR" | "EGP" | "USD";
 
 export const detectUserCurrency = async (): Promise<Currency> => {
   try {
-    const response = await fetch("https://ipapi.co/json/");
+    const response = await fetch("https://ipwho.is/");
     const data = await response.json();
     const country = data.country_code;
 
