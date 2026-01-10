@@ -77,7 +77,7 @@ const GoogleTranslate = () => {
 
     (window as any).googleTranslateElementInit = () => {
       new (window as any).google.translate.TranslateElement(
-        { pageLanguage: "ar", layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE },
+        { pageLanguage: "ar", includedLanguages: "ar,en", layout: (window as any).google.translate.TranslateElement.InlineLayout.SIMPLE },
         "google_translate_element"
       );
     };

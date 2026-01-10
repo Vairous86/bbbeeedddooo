@@ -1298,8 +1298,8 @@ const AnalyticsView = ({ orders }: { orders: Order[] }) => {
       const d = format(v.created_at || v.timestamp);
       if (!d) return false;
       if (dateFilter.year && d.y !== dateFilter.year) return false;
-      if (dateFilter.month && d.m !== dateFilter.month) return false;
-      if (dateFilter.day && d.d !== dateFilter.day) return false;
+      if (dateFilter.month && dateFilter.month !== "all" && d.m !== dateFilter.month) return false;
+      if (dateFilter.day && dateFilter.day !== "all" && d.d !== dateFilter.day) return false;
       return true;
     });
   }, [visits, dateFilter]);
@@ -1309,8 +1309,8 @@ const AnalyticsView = ({ orders }: { orders: Order[] }) => {
       const d = format(o.createdAt);
       if (!d) return false;
       if (dateFilter.year && d.y !== dateFilter.year) return false;
-      if (dateFilter.month && d.m !== dateFilter.month) return false;
-      if (dateFilter.day && d.d !== dateFilter.day) return false;
+      if (dateFilter.month && dateFilter.month !== "all" && d.m !== dateFilter.month) return false;
+      if (dateFilter.day && dateFilter.day !== "all" && d.d !== dateFilter.day) return false;
       return true;
     });
   }, [orders, dateFilter]);
@@ -1345,7 +1345,7 @@ const AnalyticsView = ({ orders }: { orders: Order[] }) => {
           <Select value={dateFilter.month} onValueChange={v => setDateFilter({ ...dateFilter, month: v })}>
             <SelectTrigger className="w-32"><SelectValue placeholder="All" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               {Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0')).map(m => (
                 <SelectItem key={m} value={m}>{m}</SelectItem>
               ))}
@@ -1357,7 +1357,7 @@ const AnalyticsView = ({ orders }: { orders: Order[] }) => {
           <Select value={dateFilter.day} onValueChange={v => setDateFilter({ ...dateFilter, day: v })}>
             <SelectTrigger className="w-24"><SelectValue placeholder="All" /></SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="all">All</SelectItem>
               {Array.from({ length: 31 }, (_, i) => (i + 1).toString().padStart(2, '0')).map(d => (
                 <SelectItem key={d} value={d}>{d}</SelectItem>
               ))}
